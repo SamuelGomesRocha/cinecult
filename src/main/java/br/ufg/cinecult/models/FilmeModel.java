@@ -13,7 +13,7 @@ public class FilmeModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idProduct;
+    private UUID idFilme;
     private String titulo;
     private String direcao;
     private String sinopse;
@@ -33,11 +33,11 @@ public class FilmeModel implements Serializable {
     }
 
     public UUID getIdProduct() {
-        return idProduct;
+        return idFilme;
     }
 
     public void setIdProduct(UUID idProduct) {
-        this.idProduct = idProduct;
+        this.idFilme = idProduct;
     }
 
     public String getTitulo() {
