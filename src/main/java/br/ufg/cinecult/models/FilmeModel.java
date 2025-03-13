@@ -20,6 +20,17 @@ public class FilmeModel implements Serializable {
     private String anoEstreia;
     private String duracao;
     private String caminhoImagem;
+    @ManyToOne
+    @JoinColumn(name = "programacao_id_programacao")
+    private ProgramacaoModel programacao;
+
+    public ProgramacaoModel getProgramacao() {
+        return programacao;
+    }
+
+    public void setProgramacao(ProgramacaoModel programacao) {
+        this.programacao = programacao;
+    }
 
     public UUID getIdProduct() {
         return idProduct;
