@@ -19,6 +19,7 @@ public class FilmeModel implements Serializable {
     private String sinopse;
     private String anoEstreia;
     private String duracao;
+    private String caminhoImagem;
 
     public UUID getIdProduct() {
         return idProduct;
@@ -66,5 +67,13 @@ public class FilmeModel implements Serializable {
 
     public void setDuracao(String duracao) {
         this.duracao = duracao;
+    }
+
+    public String getCaminhoImagem() {
+        return caminhoImagem;
+    }
+
+    public void setCaminhoImagem(String caminhoImagem) {
+        this.caminhoImagem = caminhoImagem;
     }
 }
