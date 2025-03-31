@@ -1,7 +1,5 @@
 # 🎬 Sistema de Bilheteria da Sétima Arte: CineCult
 
-![CineCult Logo](https://your-image-url.com/logo.png) *(Se houver um logo, insira aqui)*
-
 ## 📌 Sobre o Projeto
 O **CineCult** é um sistema de bilheteria para cinemas que permite:
 - Cadastro de filmes.
