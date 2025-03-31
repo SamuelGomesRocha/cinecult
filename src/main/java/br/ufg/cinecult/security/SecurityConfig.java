@@ -1,4 +1,5 @@
 package br.ufg.cinecult.security;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,19 +20,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable) // 🔥 Desabilita CSRF para APIs REST
+                .csrf(AbstractHttpConfigurer::disable) // Desabilita CSRF para APIs REST
+                .cors(withDefaults()) // 🔥 IMPORTANTE: Habilita CORS corretamente
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/public/**").permitAll() // Libera endpoints públicos
+                        .requestMatchers("/api/public/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(withDefaults()) // Habilita autenticação HTTP Basic
+                .httpBasic(withDefaults())
                 .build();
     }
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user = User.withUsername("admin")
-                .password(passwordEncoder().encode("alohomora")) // Senha com BCrypt
+                .password(passwordEncoder.encode("alohomora"))
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);

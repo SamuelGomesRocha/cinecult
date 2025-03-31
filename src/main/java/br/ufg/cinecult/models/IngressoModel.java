@@ -1,9 +1,14 @@
 package br.ufg.cinecult.models;
 
 import br.ufg.cinecult.enums.FormaPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 
+import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -13,11 +18,8 @@ public class IngressoModel implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idIngresso;
-    @OneToOne
-    @JoinColumn(name = "programacao_id_programacao")
-    private ProgramacaoModel programacao;
-    @OneToOne
-    @JoinColumn(name = "filme_id_filme")
+    @ManyToOne
+    @JoinColumn(name = "id_filme")
     private FilmeModel filme;
     @OneToOne
     @JoinColumn(name = "usuario_id_usuario")
@@ -25,6 +27,8 @@ public class IngressoModel implements Serializable {
     private String assento;
     private Double valor;
     private FormaPagamento formaPagamento;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm[:ss]")
+    private LocalDateTime dataExibicao;
 
     public UUID getIdIngresso() {
         return idIngresso;
@@ -34,12 +38,12 @@ public class IngressoModel implements Serializable {
         this.idIngresso = idIngresso;
     }
 
-    public ProgramacaoModel getProgramacao() {
-        return programacao;
+    public LocalDateTime getDataExibicao() {
+        return dataExibicao;
     }
 
-    public void setProgramacao(ProgramacaoModel programacao) {
-        this.programacao = programacao;
+    public void setDataExibicao(LocalDateTime dataExibicao) {
+        this.dataExibicao = dataExibicao;
     }
 
     public FilmeModel getFilme() {

@@ -20,12 +20,20 @@ public class FilmeModel implements Serializable {
     private String anoEstreia;
     private String duracao;
     private String caminhoImagem;
-    @ManyToOne
-    @JoinColumn(name = "programacao_id_programacao")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_programacao")
     private ProgramacaoModel programacao;
 
     public ProgramacaoModel getProgramacao() {
         return programacao;
+    }
+
+    public UUID getIdFilme() {
+        return idFilme;
+    }
+
+    public void setIdFilme(UUID idFilme) {
+        this.idFilme = idFilme;
     }
 
     public void setProgramacao(ProgramacaoModel programacao) {
@@ -87,4 +95,6 @@ public class FilmeModel implements Serializable {
     public void setCaminhoImagem(String caminhoImagem) {
         this.caminhoImagem = caminhoImagem;
     }
+
+
 }

@@ -1,9 +1,14 @@
 package br.ufg.cinecult.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,9 +20,19 @@ public class ProgramacaoModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idProgramacao;
     private String valor;
-    private String dataExibicao;
-    private String horarioExibicao;
+    @JsonDeserialize(using = LocalDateTimeListDeserializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm[:ss]")
+    private List<LocalDateTime> datasExibicao;
+    private Integer quantidade;
 
+
+    public ProgramacaoModel(Integer assentosRestantes) {
+        this.quantidade=assentosRestantes;
+    }
+
+    public ProgramacaoModel() {
+
+    }
 
     public UUID getIdProgramacao() {
         return idProgramacao;
@@ -35,19 +50,15 @@ public class ProgramacaoModel implements Serializable {
         this.valor = valor;
     }
 
-    public String getDataExibicao() {
-        return dataExibicao;
+
+    public Integer getQuantidade() {return quantidade;}
+    public void setQuantidade(Integer quantidade) {this.quantidade = quantidade;}
+
+    public List<LocalDateTime> getDatasExibicao() {
+        return datasExibicao;
     }
 
-    public void setDataExibicao(String dataExibicao) {
-        this.dataExibicao = dataExibicao;
-    }
-
-    public String getHorarioExibicao() {
-        return horarioExibicao;
-    }
-
-    public void setHorarioExibicao(String horarioExibicao) {
-        this.horarioExibicao = horarioExibicao;
+    public void setDatasExibicao(List<LocalDateTime> datasExibicao) {
+        this.datasExibicao = datasExibicao;
     }
 }

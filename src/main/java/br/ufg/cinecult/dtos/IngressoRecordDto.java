@@ -6,7 +6,8 @@ import br.ufg.cinecult.models.ProgramacaoModel;
 import br.ufg.cinecult.models.UsuarioModel;
 import jakarta.validation.constraints.NotBlank;
 
-public record IngressoRecordDto(@NotBlank ProgramacaoModel programacaoModel, @NotBlank FilmeModel filmeModel, @NotBlank
-                                UsuarioModel usuarioModel, @NotBlank String assento, @NotBlank Double valor, @NotBlank
+import java.time.LocalDateTime;
+
+public record IngressoRecordDto(FilmeModel filme, LocalDateTime dataExibicao,
                                 FormaPagamento formaPagamento) {
 }
